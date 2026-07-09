@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - Vrish Projects</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #6366f1;
+            --secondary-color: #8b5cf6;
+            --accent-color: #ec4899;
+            --dark-bg: #0f172a;
+            --light-bg: #f8fafc;
+        }
+
+        * {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--light-bg);
+            color: #1e293b;
+        }
+
+        /* Navigation */
+        .navbar {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: white !important;
+        }
+
+        .nav-link {
+            color: rgba(255, 255, 255, 0.9) !important;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: white !important;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            opacity: 0.95;
+        }
+
+        .hero-btn {
+            background: white;
+            color: var(--primary-color);
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .hero-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        /* Section Styling */
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--dark-bg);
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-header h2:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            border-radius: 2px;
+        }
+
+        .section-header p {
+            color: #64748b;
+            font-size: 1.1rem;
+            margin-top: 20px;
+        }
+
+        .section-container {
+            padding: 60px 20px;
+        }
+
+        /* Project Card */
+        .project-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            height: 100%;
+            transition: all 0.3s ease;
+            border: 1px solid #e2e8f0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+            border-color: var(--primary-color);
+        }
+
+        .project-card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+
+        .project-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .language-badge {
+            display: inline-block;
+            background: var(--light-bg);
+            color: var(--primary-color);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
+        .project-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--dark-bg);
+            margin: 15px 0;
+            word-break: break-word;
+        }
+
+        .project-description {
+            color: #64748b;
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+            flex-grow: 1;
+            min-height: 40px;
+        }
+
+        .project-link {
+            display: inline-block;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+            margin-top: auto;
+        }
+
+        .project-link:hover {
+            color: var(--secondary-color);
+        }
+
+        .project-link i {
+            margin-left: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover .project-link i {
+            transform: translateX(5px);
+        }
+
+        /* Account Section Headers */
+        .account-header {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(139, 92, 246, 0.1));
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 40px;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .account-header h3 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .account-header p {
+            color: #64748b;
+            margin: 0;
+        }
+
+        /* Stats Section */
+        .stats-section {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 50px 20px;
+            border-radius: 12px;
+            margin: 40px 0;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            opacity: 0.9;
+            margin-top: 10px;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark-bg);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        footer a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: var(--secondary-color);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .section-header h2 {
+                font-size: 1.8rem;
+            }
+
+            .project-title {
+                font-size: 1.1rem;
+            }
+        }
+
+        /* Animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .project-card {
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+
+        .project-card:nth-child(1) { animation-delay: 0.1s; }
+        .project-card:nth-child(2) { animation-delay: 0.2s; }
+        .project-card:nth-child(3) { animation-delay: 0.3s; }
+        .project-card:nth-child(4) { animation-delay: 0.4s; }
+        .project-card:nth-child(5) { animation-delay: 0.5s; }
+        .project-card:nth-child(6) { animation-delay: 0.6s; }
+        .project-card:nth-child(n+7) { animation-delay: 0.7s; }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container-lg">
+            <a class="navbar-brand" href="#home">
+                <i class="fas fa-code"></i> Vrish Portfolio
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#github">GitHub</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container-lg">
+            <h1>Welcome to My Portfolio</h1>
+            <p>Showcasing projects from <strong>appleinfo-vrish</strong> & <strong>vrishinv0829-hue</strong></p>
+            <a href="#projects" class="btn hero-btn">Explore Projects</a>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <div class="container-lg mt-5">
+        <div class="row stats-section">
+            <div class="col-md-4 stat-item">
+                <div class="stat-number">15</div>
+                <div class="stat-label">Total Projects</div>
+            </div>
+            <div class="col-md-4 stat-item">
+                <div class="stat-number">2</div>
+                <div class="stat-label">Active Accounts</div>
+            </div>
+            <div class="col-md-4 stat-item">
+                <div class="stat-number">100%</div>
+                <div class="stat-label">Open Source</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Projects Section -->
+    <section class="section-container" id="projects">
+        <div class="container-lg">
+            <div class="section-header">
+                <h2>My Projects</h2>
+                <p>A collection of web applications, utilities, and learning projects</p>
+            </div>
+
+            <!-- appleinfo-vrish Account -->
+            <div class="account-header">
+                <h3><i class="fas fa-user"></i> appleinfo-vrish</h3>
+                <p>Main account with various web development and tech projects</p>
+            </div>
+
+            <div class="row g-4 mb-5">
+                <div class="col-lg-4 col-md-6">
+                    <div class="project-card">
+                        <div class="project-card-header">
+                            <div class="project-icon">
+                                <i class="fas fa-folder"></i>
+                            </div>
+                        </div>
+                        <h3 class="project-title">Projects</h3>
+                        <p class="project-description">Repository containing various project collections</p>
+                        <span class="language-badge">Repository</span>
+                        <a href="https://github.com/appleinfo-vrish/projects" target="_blank" class="project-link">
+                            View on GitHub <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="project-card">
+                        <div class="project-card-header">
+                            <div class="project-icon">
+                                <i class="fas fa-link"></i>
+                            </div>
+                        </div>
+                        <h3 class="project-title">LinkedIn</h3>
+                        <p class="project-description">LinkedIn clone project built with JavaScript</p>
+                        <span class="language-badge">JavaScript</span>
+                        <a href="https://github.com/appleinfo-vrish/linkedinn" target="_blank" class="project-link">
+                            View on GitHub <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="project-card">
+                        <div class="project-card-header">
+                            <div class="project-icon">
+                                <i class="fas fa-code"></i>
+                            </div>
+                        </div>
+                        <h3 class="project-title">CodeYoung React</h3>
+                        <p class="project-description">React-based learning project with JavaScript</p>
+                        <span class="language-badge">JavaScript</span>
+                        <a href="https://github.com/appleinfo-vrish/codeyoungreact" target="_blank" class="project-link">
+                            View on GitHub <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="project-card">
+                        <div class="project-card-header">
+                            <div class="project-icon">
+                                <i class="fas fa-globe"></i>
+                            </div>
+                        </div>
+                        <h3 class="project-title">CodeYoung LinkedIn</h3>
+                        <p class="project-description">LinkedIn mockup built with HTML</p>
+                        <span class="language-badge">HTML</span>
+                        <a href="https://github.com/appleinfo-vrish/codeyounglinkedin" target="_blank" class="project-link">
+                            View on GitHub <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="project-card">
+                        <div class="project-card-header">
+                            <div class="project-icon">
+                                <i class="fas fa-desktop"></i>
+                            </div>
+                        </div>
+                        <h3 class="project-title">CodeYoung Demo</h3>
+                        <p class="project-description">HTML demo project for learning purposes</p>
+                        <span class="language-badge">HTML</span>
+                        <a href="https://github.com/appleinfo-vrish/codeyoungdemo" target="_blank" class="project-link">
+                            View on GitHub <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="project-card">
+                        <div class="project-card-header">
+                            <div class="project-icon">
+                                <i class="fas fa-repeat"></i>
+                            </div>
+                        </div>
+                        <h3 class="project-title">CodeYoung Again</h3>
+                        <p class="project-description">HTML practice project for web development</p>
+                        <span class="language-badge">HTML</span>
+                        <a href="https://github.com/appleinfo-vrish/codeyoungagain" target="_blank" class="project-link">
+                            View on GitHub <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="project-card">
+                        <div class="project-card-header">
+                            <div class="project-icon">
+                                <i class="fas fa-apple"></i>
+                            </div>
+                        </div>
+                        <h3 class="project-title">Apple Info</h3>
+                        <p class="project-description">Website showcasing Apple information and device specs</p>
+                        <span class="language-badge">HTML</span>
+                        <a href="https://github.com/appleinfo-vrish/appleinfo.github.io" target="_blank" class="project-link">
+                            View on GitHub <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="project-card">
+                        <div class="project-card-header">
+                            <div class="project-icon">
+                                <i class="fas fa-apple"></i>
+                            </div>
+                        </div>
+                        <h3 class="project-title">Apple Info 2</h3>
+                        <p class="project-description">Personal blog on Apple device specs and information</p>
+                        <span class="language-badge">Website</span>
+                        <a href="https://github.com/appleinfo-vrish/appleinfo2.github.io" target="_blank" class="project-link">
+                            View on GitHub <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="project-card">
+                        <div class="project-card-header">
+                            <div class="project-icon">
+                                <i class="fas fa-user-circle"></i>
+                            </div>
+                        </div>
+                        <h3 class="project-title">GitHub Pages Portfolio</h3>
+                        <p class="project-description">Personal portfolio website hosted on GitHub Pages</p>
+                        <span class="language-badge">HTML</span>
+                        <a href="https://github.com/appleinfo-vrish/appleinfo-vrish.github.io" target="_blank" class="project-link">
+                            View on GitHub <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="project-card">
+                        <div class="project-card-header">
+                            <div class="project-icon">
+                                <i class="fas fa-book"></i>
+                            </div>
+                        </div>
+                        <h3 class="project-title">Skills GitHub Pages</h3>
+                        <p class="project-description">GitHub learning repository for GitHub Pages</p>
+                        <span class="language-badge">Repository</span>
+                        <a href="https://github.com/appleinfo-vrish/skills-github-pages" target="_blank" class="project-link">
+                            View on GitHub <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- vrishinv0829-hue Account -->
+            <div class="account-header">
+                <h3><i class="fas fa-user"></i> vrishinv0829-hue</h3>
+                <p>Alternate account featuring modern web applications and hackathon projects</p>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="project-card">
+                        <div class="project-card-header">
+                            <div class="project-icon">
+                                <i class="fas fa-trophy"></i>
+                            </div>
+                        </div>
+                        <h3 class="project-title">Hackathon</h3>
+                        <p class="project-description">Modern React & TypeScript hackathon project with AI features</p>
+                        <span class="language-badge">TypeScript</span>
+                        <a href="https://github.com/vrishinv0829-hue/hackathon" target="_blank" class="project-link">
+                            View on GitHub <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="project-card">
+                        <div class="project-card-header">
+                            <div class="project-icon">
+                                <i class="fas fa-heartbeat"></i>
+                            </div>
+                        </div>
+                        <h3 class="project-title">HiHealth</h3>
+                        <p class="project-description">Health tracking and wellness management application</p>
+                        <span class="language-badge">Web App</span>
+                        <a href="https://github.com/vrishinv0829-hue/hihealth" target="_blank" class="project-link">
+                            View on GitHub <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="project-card">
+                        <div class="project-card-header">
+                            <div class="project-icon">
+                                <i class="fas fa-heartbeat"></i>
+                            </div>
+                        </div>
+                        <h3 class="project-title">Hi-Health</h3>
+                        <p class="project-description">Advanced health and wellness tracking platform</p>
+                        <span class="language-badge">Web App</span>
+                        <a href="https://github.com/vrishinv0829-hue/hi-health" target="_blank" class="project-link">
+                            View on GitHub <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GitHub Section -->
+    <section class="section-container" style="background: var(--light-bg);" id="github">
+        <div class="container-lg">
+            <div class="section-header">
+                <h2>Connect on GitHub</h2>
+                <p>Follow me for updates on new projects and contributions</p>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="project-card text-center">
+                        <div class="project-icon" style="margin: 0 auto; margin-bottom: 20px;">
+                            <i class="fab fa-github" style="font-size: 2rem;"></i>
+                        </div>
+                        <h3 class="project-title">appleinfo-vrish</h3>
+                        <p class="project-description">Main development account with diverse project portfolio</p>
+                        <a href="https://github.com/appleinfo-vrish" target="_blank" class="project-link">
+                            Visit Profile <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="project-card text-center">
+                        <div class="project-icon" style="margin: 0 auto; margin-bottom: 20px;">
+                            <i class="fab fa-github" style="font-size: 2rem;"></i>
+                        </div>
+                        <h3 class="project-title">vrishinv0829-hue</h3>
+                        <p class="project-description">Alternate account featuring modern web applications</p>
+                        <a href="https://github.com/vrishinv0829-hue" target="_blank" class="project-link">
+                            Visit Profile <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container-lg">
+            <p>&copy; 2024 Vrish Portfolio. All projects are open source.</p>
+            <p style="margin-top: 15px;">
+                <a href="https://github.com/appleinfo-vrish" target="_blank">
+                    <i class="fab fa-github"></i> appleinfo-vrish
+                </a>
+                &nbsp;&nbsp;|&nbsp;&nbsp;
+                <a href="https://github.com/vrishinv0829-hue" target="_blank">
+                    <i class="fab fa-github"></i> vrishinv0829-hue
+                </a>
+            </p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
